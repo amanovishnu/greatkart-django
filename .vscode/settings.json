@@ -1,0 +1,14 @@
+{
+    "cSpell.words": [
+        "appname",
+        "greatkart",
+        "makemigrations",
+        "runserver",
+        "sqlcode",
+        "sqlmigrate",
+        "startproject",
+        "STATICFILES"
+    ],
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": false
+}
