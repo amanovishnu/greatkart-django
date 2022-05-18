@@ -16,6 +16,7 @@ def _cart_id(request): # private method
 def add_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     product_variation = list()
+
     if request.method == 'POST':
         for item in request.POST:
             key = item
@@ -32,13 +33,23 @@ def add_cart(request, product_id):
         cart = Cart.objects.create(cart_id = _cart_id(request)) # PEP style for naming for _cart_id()
     finally:
         cart.save()
+
     try:
         cart_item = CartItem.objects.get(product=product, cart=cart)
+        if len(product_variation) > 0:
+            cart_item.variations.clear()
+            for item in product_variation:
+                cart_item.variations.add(item)
         cart_item.quantity += 1 # incrementing quantity
     except CartItem.DoesNotExist:
         cart_item = CartItem.objects.create(product=product, cart=cart, quantity=1)
+        if len(product_variation) > 0:
+            cart_item.variations.clear()
+            for item in product_variation:
+                cart_item.variations.add(item)
     finally:
         cart_item.save()
+
     return redirect('cart')
 
 
