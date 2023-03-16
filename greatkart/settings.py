@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
     'category.apps.CategoryConfig',
     'accounts.apps.AccountsConfig',
     'store.apps.StoreConfig',
@@ -75,6 +76,8 @@ TEMPLATES = [
 
                 # Custom Context Processors
                 'category.context_processors.menu_links',
+                'cart.context_processors.cart_counter',
+
             ],
         },
     },
