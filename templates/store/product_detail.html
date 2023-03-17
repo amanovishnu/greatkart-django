@@ -16,69 +16,52 @@
                     </article>
                 </aside>
                 <main class="col-md-6 border-left">
-                    <article class="content-body">
-                        <h2 class="title">{{product.product_name}}</h2>
-                        <div class="mb-3">
-                            <var class="price h4">${{product.price}}</var>
-                        </div>
-                        <p>{{product.description}}</p>
-                        <hr>
-                        <div class="row">
-                            <div class="item-option-select">
-                                <h6>Choose Color</h6>
-                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> Silver
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> Gray
-                                    </label>
-                                    <label class="btn btn-light active">
-                                        <input type="radio" name="radio_color checked"> Gold
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> Black
-                                    </label>
+                    <form action="{% url 'add_cart' product.id %}" method="POST">
+                        {% csrf_token %}
+                        <article class="content-body">
+                            <h2 class="title">{{product.product_name}}</h2>
+                            <div class="mb-3">
+                                <var class="price h4">${{product.price}}</var>
+                            </div>
+                            <p>{{product.description}}</p>
+                            <hr>
+                            <div class="row">
+                                <div class="item-option-select w-25">
+                                    <h6>Choose Color</h6>
+                                    <select name="color" class="form-control form-control-sm" required>
+                                        <option value="" disabled selected>Color Options</option>
+                                        {% for item in product.variation_set.colors %}
+                                        <option value="{{item.variation_value|lower}}">{{item.variation_value|capfirst}}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="item-option-select">
-                                <h6>Select Size</h6>
-                                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> S
-                                    </label>
-                                    <label class="btn btn-light active">
-                                        <input type="radio" name="radio_color" checked> M
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> L
-                                    </label>
-                                    <label class="btn btn-light">
-                                        <input type="radio" name="radio_color"> XL
-                                    </label>
+                            <div class="row">
+                                <div class="item-option-select w-25">
+                                    <h6>Select Size</h6>
+                                    <select name="size" class="form-control form-control-sm">
+                                        <option value="" disabled selected>Size Options</option>
+                                        {% for item in product.variation_set.sizes %}
+                                        <option value="{{item.variation_value|lower}}">{{item.variation_value|capfirst}}</option>
+                                        {% endfor %}
+                                    </select>
                                 </div>
                             </div>
-                        </div>
-                        <hr>
-                        {% if product.stock < 1 %}
-                        <h3 class="text-danger mb-0 text-uppercase text-center my-auto">Item out of Stock</h3>
-                        {% else %}
-                            {% if in_cart %}
-                            <a href="#" class="btn  btn-success">
-                                <span class="text">Added to Cart</span> <i class="fas fa-check"></i>
-                            </a>
-                            <a href="{% url 'cart' %}" class="btn  btn-outline-primary">
-                                <span class="text">View Cart</span> <i class="fas fa-eye"></i>
-                            </a>
+                            <hr>
+                            {% if product.stock < 1 %}
+                            <h3 class="text-danger mb-0 text-uppercase text-center my-auto">Item out of Stock</h3>
                             {% else %}
-                            <a href="{% url 'add_cart' product.id %}" class="btn  btn-primary">
-                                <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>
-                            </a>
+                                <button type="submit" class="btn  btn-primary">
+                                    <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>
+                                </button>
+                                {% if in_cart %}
+                                <a href="{% url 'cart' %}" class="btn  btn-outline-primary">
+                                    <span class="text">View Cart</span> <i class="fas fa-eye"></i>
+                                </a>
+                                {% endif %}
                             {% endif %}
-                        {% endif %}
-                    </article>
+                        </article>
+                    </form>
                 </main>
             </div>
         </div>
