@@ -37,6 +37,7 @@ class MyAccountManager(BaseUserManager):
         user.save(using=self.db)
         return user
 
+
 class Account(AbstractBaseUser):
 
     # model fields
