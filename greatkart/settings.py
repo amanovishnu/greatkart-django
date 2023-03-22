@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'store.apps.StoreConfig',
     'cart.apps.CartConfig',
-
 ]
 
 MIDDLEWARE = [
@@ -73,12 +72,13 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-
                 # Custom Context Processors
                 'category.context_processors.menu_links',
                 'cart.context_processors.cart_counter',
-
             ],
+            'libraries': {
+                'custom_filters': 'greatkart.templatetags.custom_filters',
+            },
         },
     },
 ]
