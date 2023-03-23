@@ -63,8 +63,8 @@
                                 </td>
                                 <td>
                                     <div class="price-wrap">
-                                        <var class="price">${{item.get_sub_total|intcomma}}</var>
-                                        <small class="text-muted"> ${{item.product.price|intcomma}} each </small>
+                                        <var class="price">₹{{item.get_sub_total|intcomma}}</var>
+                                        <small class="text-muted"> ₹{{item.product.price|intcomma}} each </small>
                                     </div>
                                 </td>
                                 <td class="text-right">
@@ -86,15 +86,15 @@
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">${{total|intcomma}}</dd>
+                            <dd class="text-right">₹ {{total|intcomma}}</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Tax:</dt>
-                            <dd class="text-right"> ${{tax|intcomma}}</dd>
+                            <dd class="text-right"> ₹ {{tax|intcomma}}</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Grand Total:</dt>
-                            <dd class="text-right text-dark b"><strong>${{grand_total|intcomma}}</strong></dd>
+                            <dd class="text-right text-dark b"><strong>₹ {{grand_total|intcomma}}</strong></dd>
                         </dl>
                         <hr>
                         <p class="text-center mb-3">

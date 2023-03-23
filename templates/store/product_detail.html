@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load custom_filters %}
 
 {% block content %}
 
@@ -20,8 +21,12 @@
                         {% csrf_token %}
                         <article class="content-body">
                             <h2 class="title">{{product.product_name}}</h2>
+                            <span class="text-danger h4 float-right">
+                                <strike>₹{{product.price|show_discounted_price:product.discount}}</strike>
+                            </span>
+                            <span class="price mt-1 text-primary float-right mx-3">-{{product.discount}}%Off</span>
                             <div class="mb-3">
-                                <var class="price h4">${{product.price}}</var>
+                                <var class="price h2">₹{{product.price}}</var>
                             </div>
                             <p>{{product.description}}</p>
                             <hr>
